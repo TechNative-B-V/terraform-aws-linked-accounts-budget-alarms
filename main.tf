@@ -47,7 +47,7 @@ resource "aws_cloudwatch_event_rule" "trigger_lambda" {
 }
 
 resource "aws_cloudwatch_event_target" "lambda_target" {
-  rule = "${aws_cloudwatch_event_rule.trigger_lambda.name}"
+  rule = aws_cloudwatch_event_rule.trigger_lambda.name
   arn  = module.lambda_function.lambda_function_arn
 }
 

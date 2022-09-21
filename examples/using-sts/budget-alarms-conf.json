@@ -1,0 +1,12 @@
+{
+  "configured_accounts": {
+    "XXXXXXXXXXXX": {
+      "threshold_amount": 250
+    },
+
+    "XXXXXXXXXXXX": {
+      "threshold_amount": 0.20
+    }
+  }
+}
+
