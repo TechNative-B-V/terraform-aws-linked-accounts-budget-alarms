@@ -23,7 +23,6 @@ ARN of this role should be configured in `sts_master_account_role_arn`.
 
 No requirements.
 
-
 ## Providers
 
 | Name | Version |
