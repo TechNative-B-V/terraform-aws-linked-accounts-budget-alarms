@@ -6,10 +6,23 @@ reached a notification is sent to a slack channel.
 
 [![](we-are-technative.png)](https://www.technative.nl)
 
+## How does it work
+
+Every day a lambda script runs the cost explorer and compares the total costs
+of each linked account with the configured budget. If costs exceed a slack
+notification is sent using a [webhook](https://api.slack.com/messaging/webhooks).
+
+![](slacknot.png)
+
+A Role with the querying account defined as trustee. And a policy allowing
+ListAccess to the Cost Explorer is must be created on the master account. The
+ARN of this role should be configured in `sts_master_account_role_arn`.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 No requirements.
+
 
 ## Providers
 
