@@ -1,5 +1,8 @@
 # Terraform AWS Linked Accounts Budget Alarms
 
+[![Terraform Version][terraform-version-shield]][terraform-version-url]
+[![Latest Release][release-shield]][release-url]
+
 This module implements an automatic check if member accounts of an AWS
 organization exceed their spent cost limits. When an account threshold is
 reached a notification is sent to a slack channel.
