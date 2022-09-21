@@ -32,22 +32,9 @@ variable "default_threshold" {
 
 variable "configured_accounts_json" {
   type = string
+  description = "JSON string which configures account to have their own threshold cost amount."
   default = <<EOS
 { "configured_accounts": {} }
-EOS
-
-  description = <<EOS
-JSON string which configures account to have their own threshold cost amount.
-
-example:
-{
-  "configured_accounts": {
-    "000000000013": {
-      "threshold_amount": 250
-    }
-  }
-}
-
 EOS
 
 }

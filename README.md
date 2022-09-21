@@ -8,6 +8,13 @@ reached a notification is sent to a slack channel.
 
 [![](we-are-technative.png)](https://www.technative.nl)
 
+## Why not AWS own budget module?
+
+[AWS Budgets Service](https://aws.amazon.com/aws-cost-management/aws-budgets/)
+must be pre configured for every account. You can not set a standard for new
+accounts. This module checks every account, including new not yet provisioned
+accounts with a default threshold.
+
 ## How does it work
 
 Every day a lambda script runs the cost explorer and compares the total costs
@@ -16,13 +23,34 @@ notification is sent using a [webhook](https://api.slack.com/messaging/webhooks)
 
 ![](slacknot.png)
 
+## Usage
 
-## Requirement
+### STS Access Role
 
 You need a role with the querying account defined as trustee and a policy
 allowing ListAccess to the Cost Explorer is must be created on the master
 account. The ARN of this role should be configured in
-`sts_master_account_role_arn`.
+`sts_master_account_role_arn.
+
+### Json Budget Configuration
+
+Every account can have it's own budget in dollars. It's defined in json.
+
+```
+{
+  "configured_accounts": {
+    "000000000011": {
+      "threshold_amount": 2.5
+    }
+    "000000000012": {
+      "threshold_amount": 50
+    }
+    "000000000013": {
+      "threshold_amount": 250
+    }
+  }
+}
+```
 
 <!-- BEGIN_TF_DOCS -->
 ## Providers
@@ -50,7 +78,7 @@ account. The ARN of this role should be configured in
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_check_schedule"></a> [check\_schedule](#input\_check\_schedule) | Schedule expression that defines when and/or how often the budgets should be checked.<br><br>See https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html for valid schedule expressions. | `string` | `"rate(1 day)"` | no |
-| <a name="input_configured_accounts_json"></a> [configured\_accounts\_json](#input\_configured\_accounts\_json) | JSON string which configures account to have their own threshold cost amount.<br><br>example:<br>{<br>  "configured\_accounts": {<br>    "000000000013": {<br>      "threshold\_amount": 250<br>    }<br>  }<br>} | `string` | `"{ \"configured_accounts\": {} }\n"` | no |
+| <a name="input_configured_accounts_json"></a> [configured\_accounts\_json](#input\_configured\_accounts\_json) | JSON string which configures account to have their own threshold cost amount. | `string` | `"{ \"configured_accounts\": {} }\n"` | no |
 | <a name="input_default_threshold"></a> [default\_threshold](#input\_default\_threshold) | When an account has no own threshold configuration this default threshold triggers an alarm. | `number` | n/a | yes |
 | <a name="input_slack_webhook_url"></a> [slack\_webhook\_url](#input\_slack\_webhook\_url) | Slack webhook url to channel which receives the notifications | `string` | n/a | yes |
 | <a name="input_sts_master_account_role_arn"></a> [sts\_master\_account\_role\_arn](#input\_sts\_master\_account\_role\_arn) | STS Master Account Role ARN to the master account Cost Explorer Service.<br><br>When you run this function from another account then the master organization<br>account this role gives the querying account access. | `string` | `""` | no |
