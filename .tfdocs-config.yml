@@ -3,5 +3,4 @@ formatter: "markdown"
 sections:
   hide:
     - requirements
-    - Requirements
 
