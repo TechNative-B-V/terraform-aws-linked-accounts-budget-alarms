@@ -26,6 +26,8 @@ notification is sent using a [webhook](https://api.slack.com/messaging/webhooks)
 
 ## Usage
 
+[example](examples/using-sts)
+
 ### STS Access Role
 
 You need a role with the querying account defined as trustee and a policy
