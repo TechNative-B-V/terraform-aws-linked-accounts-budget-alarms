@@ -5,8 +5,8 @@
 This module implements an automatic check if member accounts of an AWS
 organization exceed their spent cost limits. When an account threshold is
 reached a notification is sent to a slack channel.
-[![](we-are-technative.png)](https://www.technative.nl)
 
+[![](we-are-technative.png)](https://www.technative.nl)
 [Hire us](https://www.technative.nl/services/) | [Kom bij ons werken](https://www.technative.nl/technative/#workingat)
 
 ## Why not AWS own budget module?
