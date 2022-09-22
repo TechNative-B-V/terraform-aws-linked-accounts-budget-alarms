@@ -47,7 +47,7 @@ Every account can have it's own budget in dollars. It's defined in json.
       "threshold_amount": 50
     }
     "000000000013": {
-      "threshold_amount": 250
+      "threshold_amount": 2500
     }
   }
 }
